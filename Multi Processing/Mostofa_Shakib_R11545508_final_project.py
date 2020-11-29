@@ -37,18 +37,26 @@ def main():
     		board = result
 
     	processPool = Pool(processes=numberOfThreads)
-    	poolData = list()
+    	poolData = []
 
     	dividend = rows//numberOfThreads
+    	extras = rows % numberOfThreads
     	count = numberOfThreads
     	startRow = 0
     	endRow = startRow + dividend
 
     	while(count > 1):
-    		poolData.append([board, startRow, endRow])
-    		startRow = endRow
-    		endRow = startRow + dividend
-    		count -= 1
+    		if extras > 0:
+    			poolData.append([board, startRow, endRow+1])
+    			startRow = endRow+1
+    			endRow = startRow + dividend
+    			count -= 1
+    			extras -= 1
+    		else:
+    			poolData.append([board, startRow, endRow])
+    			startRow = endRow
+    			endRow = startRow + dividend
+    			count -= 1
 
     	poolData.append([board, startRow, rows])
 
