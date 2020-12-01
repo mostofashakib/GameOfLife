@@ -32,11 +32,12 @@ def main():
 
     print("Project :: R11545508\n")
 
+    processPool = Pool(processes=numberOfThreads)
+    
     for i in range(100):
     	if i > 0:
     		board = result
 
-    	processPool = Pool(processes=numberOfThreads)
     	poolData = []
 
     	dividend = rows//numberOfThreads
